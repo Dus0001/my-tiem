@@ -3,6 +3,7 @@ const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
+const generateHTML = require('./src/generateHtml');
 const teamArray = [];
 
 const createManager = () => {
@@ -55,7 +56,7 @@ const createManager = () => {
                     console.log('Please enter an office number.')
                     return false;
                 }
-            }
+            },
     ])
     .then(managerInput => {
         let manager = new Manager(managerInput.name, managerInput.id, managerInput.email, managerInput.officeNumber);
@@ -71,7 +72,7 @@ const addEmployee = () => {
             name:'role',
             message:'Which employee would you like to add?',
             choices:['Engineer', 'Intern'],
-            validate: employeeSelection =>{
+            validate: employeeSelection => {
                 if(employeeSelection){
                     return true;
                 }
@@ -89,7 +90,7 @@ const addEmployee = () => {
                     return true;
                 }
                 console.log('Please enter an employee name.')
-                return false
+                return false;
             }
         },
         {
@@ -113,8 +114,8 @@ const addEmployee = () => {
                 if(emailInput){
                     return true;
                 }
-                console.log('Please enter an email ')
-                return false
+                console.log('Please enter an email.')
+                return false;
             }
         },
         {
@@ -124,7 +125,7 @@ const addEmployee = () => {
             when: (choice) => choice.role === "Engineer",
             validate: githubInput => {
                 if(githubInput){
-                    return true
+                    return true;
                 }
                 console.log("Please enter a GitHub username.");
                 return false;
@@ -138,10 +139,10 @@ const addEmployee = () => {
             when: (choice) => choice.role === 'Intern',
             validate: schoolInput => {
                 if(schoolInput){
-                    return true
+                    return true;
                 }
-                console.log('Please enter a School name.')
-                return false
+                console.log('Please enter a School name.');
+                return false;
             }
         },
         {
@@ -166,19 +167,24 @@ const addEmployee = () => {
             return addEmployee(teamArray)
         } else {
             return teamArray;
-        }
+        };
     });
     
-}
+};
+function writeToFile(fileName, data) {
 
-function writeHTML(fileName, answers) {
-fs.writeFile(fileName, answers, err => {
-    if(err){
-        console.log(err);
-        return;
-    }
-    console.log('Your file has been generated!');
-});
+        fs.writeFile('./dist/index.html', generateHTML(teamArray), err => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log('Check out your new page!');
+        });
+    
+};
 
 createManager()
 .then(addEmployee)
+   .then(HTML => {
+    writeToFile(HTML)
+   });
