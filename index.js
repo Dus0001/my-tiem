@@ -171,5 +171,14 @@ const addEmployee = () => {
     
 }
 
+function writeHTML(fileName, answers) {
+fs.writeFile(fileName, answers, err => {
+    if(err){
+        console.log(err);
+        return;
+    }
+    console.log('Your file has been generated!');
+});
+
 createManager()
-.then(addEmployee);
+.then(addEmployee)
