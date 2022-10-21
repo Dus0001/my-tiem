@@ -6,7 +6,7 @@ const Engineer = require('./lib/Engineer');
 const teamArray = [];
 
 const createManager = () => {
-    inquirer
+    return inquirer
     .prompt([
         {
             type: 'input',
@@ -64,11 +64,11 @@ const createManager = () => {
 };
 
 const addEmployee = () => {
-    inquirer
+    return inquirer
     .prompt([
         {
-            type:'choice',
-            name:'employee',
+            type:'list',
+            name:'role',
             message:'Which employee would you like to add?',
             choices:['Engineer', 'Intern'],
             validate: employeeSelection =>{
@@ -79,6 +79,18 @@ const addEmployee = () => {
                 return false;
             }
 
+        },
+        {
+            type:'input',
+            name:'name',
+            message: 'Please enter the employee name.',
+            validate: nameInput => {
+                if(nameInput){
+                    return true;
+                }
+                console.log('Please enter an employee name.')
+                return false
+            }
         },
         {
             type:'input',
@@ -109,7 +121,7 @@ const addEmployee = () => {
             type:'input',
             name:'github',
             message:'Please enter employee GitHub username.',
-            when: (choice) => choice.employee === "Engineer",
+            when: (choice) => choice.role === "Engineer",
             validate: githubInput => {
                 if(githubInput){
                     return true
@@ -123,7 +135,7 @@ const addEmployee = () => {
             type:'input',
             name:'school',
             message:"What is the name of the Intern's school",
-            when: (choice) => choice.employee === 'Intern',
+            when: (choice) => choice.role === 'Intern',
             validate: schoolInput => {
                 if(schoolInput){
                     return true
@@ -136,21 +148,22 @@ const addEmployee = () => {
             type:'confirm',
             name:'exit',
             message:'Do you want to add more teammates?',
-            default: false,
+            
         },
     ])
     .then(userInput => {
-        if(userInput.employee === 'Engineer'){
-            let engineer = new Engineer(userInput.employee, userInput.id,userInput.email,userInput.github);
+        if(userInput.role === 'Engineer'){
+            let engineer = new Engineer(userInput.name, userInput.id,userInput.email,userInput.github);
             teamArray.push(engineer);
         
-        } else if(userInput.employee === 'Intern'){
-            let intern = new Intern(userInput.employee, userInput.id,userInput.email,userInput.github);
+        } else if(userInput.role === 'Intern'){
+            let intern = new Intern(userInput.name, userInput.id,userInput.email,userInput.github);
             teamArray.push(intern);
         };
+        console.log(teamArray);
 
         if(userInput.exit){
-            return this.addEmployee
+            return addEmployee(teamArray)
         } else {
             return teamArray;
         }
