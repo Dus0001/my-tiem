@@ -1,24 +1,23 @@
-        function renderManager(manager){
+const renderManager = (manager) => {
         return `
         <div class="card employee-card">
         <div class="card-header bg-primary text-white">
-            <h2 class="card-title">${manager.getName()}</h2>
+            <h2 class="card-title">${manager.name}</h2>
             <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>Manager</h3>
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">ID: ${manager.getId()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">School: ${manager.getSchool()}</li>
+                <li class="list-group-item">ID: ${manager.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${intern.email}">${manager.email}</a></li>
+                <li class="list-group-item">School: ${manager.school}</li>
             </ul>
         </div>
     </div>
         `
-    
-    };
+};
     
 
-    function renderEngineer(engineer){
+const renderEngineer = (engineer) => {
        return `
         <div class="card employee-card">
         <div class="card-header bg-primary text-white">
@@ -27,59 +26,57 @@
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">ID: ${engineer.id()}</li>
+                <li class="list-group-item">ID: ${engineer.id}</li>
                 <li class="list-group-item">Email: <a href="mailto:${intern.email}">${engineer.email}</a></li>
                 <li class="list-group-item">School: ${engineer.school}</li>
             </ul>
         </div>
     </div>
         `
+};
 
-    };
-
-    function renderIntern(intern){
+const renderIntern = (intern) => {
         return `
         <div class="card employee-card">
         <div class="card-header bg-primary text-white">
-            <h2 class="card-title">${intern.getName()}</h2>
+            <h2 class="card-title">${intern.name}</h2>
             <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>Intern</h3>
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">ID: ${intern.getId()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
-                <li class="list-group-item">School: ${intern.getSchool()}</li>
+                <li class="list-group-item">ID: ${intern.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
+                <li class="list-group-item">School: ${intern.school}</li>
             </ul>
         </div>
     </div>
         `
-    };
+};
 
 
 
- createTeamCard = (teamArray) => {
+createTeamCard = (teamArray) => {
     let teamCard = [];
 
-    for(i=0; i < teamArray.length; i++) {
-        if(teamData.getrole() === 'Manager'){
-            const managerCard = renderManager(teamArray[i]);
-            teamCard.push(managerCard);
+    for(let i=0; i < teamArray.length; i++) {
+
+        if(teamArray.role === 'Manager'){
+            const manager = renderManager(teamArray[i]);
+            teamCard.push(manager);
         };
-        if(teamData.getrole() === 'Engineer'){
-            const engineerCard = renderEngineer(teamArray[i]);
-            teamCard.push(engineerCard);
+        if(teamArray.role === 'Engineer'){
+            const engineer = renderEngineer(teamArray[i]);
+            teamCard.push(engineer);
         };
-        if(teamData.getrole() === 'Intern'){
-            const internCard = renderIntern(teamArray[i]);
-            teamCard.push(internCard);
+        if(teamArray.role === 'Intern'){
+            const intern = renderIntern(teamArray[i]);
+            teamCard.push(intern);
         };
     };
-
-    const employeeCard = teamCard.join('')
-    const finalHtml = renderFinalHTML(employeeCard);
-    return finalHtml;
-
- };
+   const employeeCard = teamCard.join('')
+   const finalHtml = renderFinalHTML(employeeCard);
+   return finalHtml;
+};
 
 const renderFinalHTML = (employeeCard) => {
     return `
@@ -113,6 +110,6 @@ const renderFinalHTML = (employeeCard) => {
      
  </body>
  </html>
- `};
+`};
 
  module.exports = renderFinalHTML;

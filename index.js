@@ -158,10 +158,9 @@ const addEmployee = () => {
             teamArray.push(engineer);
         
         } else if(userInput.role === 'Intern'){
-            let intern = new Intern(userInput.name, userInput.id,userInput.email,userInput.github);
+            let intern = new Intern(userInput.name, userInput.id,userInput.email,userInput.school);
             teamArray.push(intern);
         };
-        console.log(teamArray);
 
         if(userInput.exit){
             return addEmployee(teamArray)
@@ -171,9 +170,9 @@ const addEmployee = () => {
     });
     
 };
-function writeToFile(fileName, data) {
+const writeToFile= teamArray => {
 
-        fs.writeFile('./dist/index.html', generateHTML(teamArray), err => {
+        fs.writeFile('./dist/index.html', teamArray, err => {
             if (err) {
                 console.log(err);
                 return;
@@ -185,6 +184,11 @@ function writeToFile(fileName, data) {
 
 createManager()
 .then(addEmployee)
-   .then(HTML => {
-    writeToFile(HTML)
-   });
+   .then(teamArray => {
+    console.log(teamArray);
+    return generateHTML(teamArray)
+   })
+.then(index => {
+    console.log(index);
+    return writeToFile(index)
+})
