@@ -165,6 +165,7 @@ const addEmployee = () => {
         if(userInput.exit){
             return addEmployee(teamArray)
         } else {
+
             return teamArray;
         };
     });
@@ -185,10 +186,8 @@ const writeToFile= teamArray => {
 createManager()
 .then(addEmployee)
    .then(teamArray => {
-    console.log(teamArray);
     return generateHTML(teamArray)
    })
 .then(index => {
-    console.log(index);
     return writeToFile(index)
 })

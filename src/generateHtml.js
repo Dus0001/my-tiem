@@ -1,4 +1,4 @@
-const renderManager = (manager) => {
+const renderManager = function(manager) {
         return `
         <div class="card employee-card">
         <div class="card-header bg-primary text-white">
@@ -8,8 +8,8 @@ const renderManager = (manager) => {
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item">ID: ${manager.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${intern.email}">${manager.email}</a></li>
-                <li class="list-group-item">School: ${manager.school}</li>
+                <li class="list-group-item">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
+                <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
             </ul>
         </div>
     </div>
@@ -17,7 +17,7 @@ const renderManager = (manager) => {
 };
     
 
-const renderEngineer = (engineer) => {
+const renderEngineer= function(engineer) {
        return `
         <div class="card employee-card">
         <div class="card-header bg-primary text-white">
@@ -27,15 +27,15 @@ const renderEngineer = (engineer) => {
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item">ID: ${engineer.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${intern.email}">${engineer.email}</a></li>
-                <li class="list-group-item">School: ${engineer.school}</li>
+                <li class="list-group-item">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
+                <li class="list-group-item">GitHub: ${engineer.github}</li>
             </ul>
         </div>
     </div>
         `
 };
 
-const renderIntern = (intern) => {
+const renderIntern = function(intern) {
         return `
         <div class="card employee-card">
         <div class="card-header bg-primary text-white">
@@ -57,28 +57,27 @@ const renderIntern = (intern) => {
 
 createTeamCard = (teamArray) => {
     let teamCard = [];
-
-    for(let i=0; i < teamArray.length; i++) {
-
-        if(teamArray.role === 'Manager'){
+    
+    for(let i=0; i<teamArray.length; i++ ){
+        if(teamArray[i].getRole() === 'Manager'){
             const manager = renderManager(teamArray[i]);
             teamCard.push(manager);
-        };
-        if(teamArray.role === 'Engineer'){
+        } else if(teamArray[i].getRole() === 'Engineer'){
             const engineer = renderEngineer(teamArray[i]);
             teamCard.push(engineer);
-        };
-        if(teamArray.role === 'Intern'){
+        } else if(teamArray[i].getRole() === 'Intern'){
             const intern = renderIntern(teamArray[i]);
             teamCard.push(intern);
-        };
+        }
     };
-   const employeeCard = teamCard.join('')
-   const finalHtml = renderFinalHTML(employeeCard);
-   return finalHtml;
+    
+
+   const employeeCard = teamCard.join('');
+   const finalHTML = renderFinalHTML(employeeCard)
+   return finalHTML;
 };
 
-const renderFinalHTML = (employeeCard) => {
+function renderFinalHTML(employeeCard) {
     return `
  <!DOCTYPE html>
  <html lang="en">
@@ -101,6 +100,7 @@ const renderFinalHTML = (employeeCard) => {
                  <div class="row team-area col-12 d-flex justify-content-center">
                      ${employeeCard}
                      
+                     
                  </div>
                  </div>
              </div>
@@ -112,4 +112,4 @@ const renderFinalHTML = (employeeCard) => {
  </html>
 `};
 
- module.exports = renderFinalHTML;
+ module.exports = createTeamCard;
