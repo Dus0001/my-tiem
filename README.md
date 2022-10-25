@@ -16,16 +16,16 @@
 
     https://opensource.org/licenses/MIT
     
+ 
+    
 
   ## Description
     An app that allows users to generate  a webpage that displays team information.
     
-    Link to Demo: https://drive.google.com/file/d/1990Payre9YNhHSQ9ACzwZkG2X2K2X_-j/view?usp=sharing
-    <img width="1048" alt="Screen Shot 2022-10-24 at 8 26 43 PM" src="https://user-images.githubusercontent.com/109925067/197660543-47082db8-3299-4d70-ac0b-c67dd812bbcb.png">
-
+   Link to Demo: https://drive.google.com/file/d/1990Payre9YNhHSQ9ACzwZkG2X2K2X_-j/view?usp=sharing
+   
+   <img width="1048" alt="Screen Shot 2022-10-24 at 8 26 43 PM" src="https://user-images.githubusercontent.com/109925067/197660543-47082db8-3299-4d70-ac0b-c67dd812bbcb.png">
     
-    
-
   ## Install
     Download node and npm packages.
   ## Usage
@@ -37,5 +37,5 @@
     You can test the application with jest.js.
   ## Contact
     Contact me at:
-    Email: davensteen@gmail.com
-    GitHub: Dus0001
+   Email: davensteen@gmail.com
+   GitHub: Dus0001
